@@ -3,35 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nightz - Tokenized Luxury Stays</title>
+    <title>Nightz Demo - Tokenized Luxury Stays</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Exact colors from their PDF */
+        /* Enhanced Design System */
         :root {
             --primary-blue: #2563eb;
-            --dark-bg: #0f172a;
+            --primary-dark: #0f172a;
             --card-bg: #1e293b;
             --text-light: #f1f5f9;
             --text-muted: #94a3b8;
             --border: #334155;
             --success: #10b981;
             --accent: #8b5cf6;
+            --warning: #f59e0b;
+            --gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         }
         
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
         }
         
         body {
-            background: var(--dark-bg);
+            background: var(--primary-dark);
             color: var(--text-light);
             min-height: 100vh;
             overflow-x: hidden;
+            font-weight: 400;
+            line-height: 1.6;
+        }
+
+        /* Demo Banner */
+        .demo-banner {
+            background: linear-gradient(90deg, var(--accent), var(--primary-blue));
+            color: white;
+            text-align: center;
+            padding: 0.75rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+            position: relative;
+            overflow: hidden;
         }
         
+        .demo-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            animation: shimmer 3s infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
         /* Enhanced Navigation */
         .navbar {
             display: flex;
@@ -47,33 +82,56 @@
         }
         
         .nav-logo {
-            font-size: 1.5rem;
-            font-weight: bold;
+            font-size: 1.75rem;
+            font-weight: 800;
             background: linear-gradient(135deg, var(--primary-blue), var(--accent));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .nav-logo::before {
+            content: '🌙';
+            font-size: 1.5rem;
         }
         
         .nav-links {
             display: flex;
-            gap: 2rem;
+            gap: 1.5rem;
         }
         
         .nav-links a {
             color: var(--text-light);
             text-decoration: none;
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            transition: all 0.3s;
+            padding: 0.75rem 1.25rem;
+            border-radius: 12px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
         
         .nav-links a.active {
             background: var(--primary-blue);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
         }
         
         .nav-links a:not(.active):hover {
             background: rgba(255,255,255,0.1);
+            transform: translateY(-2px);
+        }
+        
+        .nav-links a .nav-badge {
+            background: var(--accent);
+            color: white;
+            font-size: 0.7rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 10px;
+            margin-left: 0.25rem;
         }
         
         .nav-right {
@@ -85,17 +143,20 @@
         .search-bar {
             background: var(--card-bg);
             border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 0.5rem 1rem;
+            border-radius: 12px;
+            padding: 0.75rem 1rem;
             color: var(--text-light);
             margin-right: 1rem;
             transition: all 0.3s;
+            width: 200px;
+            font-weight: 400;
         }
         
         .search-bar:focus {
             outline: none;
             border-color: var(--primary-blue);
-            box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+            width: 250px;
         }
         
         .connect-wallet {
@@ -103,33 +164,51 @@
             color: white;
             border: none;
             padding: 0.75rem 1.5rem;
-            border-radius: 8px;
+            border-radius: 12px;
             cursor: pointer;
             font-weight: 600;
-            transition: all 0.3s;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
         
         .connect-wallet:hover {
             background: #1d4ed8;
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.3);
         }
 
-        /* Enhanced Main Container */
+        /* Main Container */
         .main-container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             padding: 2rem;
         }
 
-        /* Enhanced Hero Section */
-        .hero {
+        /* Page System */
+        .page {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .page.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Enhanced Trade Layout - Making it the Focus */
+        .trade-hero {
             text-align: center;
             margin-bottom: 3rem;
             position: relative;
         }
         
-        .hero h1 {
+        .trade-hero h1 {
             font-size: 3.5rem;
             margin-bottom: 1rem;
             font-weight: 800;
@@ -139,168 +218,71 @@
             animation: fadeInUp 0.8s ease;
         }
         
-        .hero p {
+        .trade-hero p {
             font-size: 1.3rem;
             color: var(--text-muted);
             margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
             animation: fadeInUp 0.8s ease 0.2s both;
-        }
-        
-        .hero-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            animation: fadeInUp 0.8s ease 0.4s both;
-        }
-        
-        .hero-btn {
-            background: var(--primary-blue);
-            color: white;
-            border: none;
-            padding: 1rem 2rem;
-            border-radius: 12px;
-            font-size: 1.1rem;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-weight: 600;
-        }
-        
-        .hero-btn:hover {
-            background: #1d4ed8;
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.3);
-        }
-        
-        .hero-btn.secondary {
-            background: transparent;
-            border: 2px solid var(--primary-blue);
-        }
-        
-        .hero-btn.secondary:hover {
-            background: rgba(37, 99, 235, 0.1);
+            font-weight: 400;
         }
 
-        /* Enhanced Quick Sections */
-        .quick-sections {
+        /* Interactive Trade Dashboard */
+        .trade-dashboard {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1fr 400px;
             gap: 2rem;
             margin-bottom: 3rem;
         }
         
-        .section-card {
+        .trade-main {
             background: var(--card-bg);
-            border-radius: 16px;
-            padding: 1.5rem;
+            border-radius: 20px;
+            padding: 2rem;
             border: 1px solid var(--border);
-            transition: all 0.3s;
-            animation: fadeIn 0.6s ease;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
         }
         
-        .section-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            border-color: var(--primary-blue);
-        }
-        
-        .section-header {
+        .trade-sidebar {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1rem;
-        }
-        
-        .view-all {
-            color: var(--primary-blue);
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: all 0.3s;
-        }
-        
-        .view-all:hover {
-            transform: translateX(3px);
-        }
-
-        /* Enhanced Properties Grid */
-        .properties-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            flex-direction: column;
             gap: 1.5rem;
         }
-        
-        .property-item {
-            background: var(--card-bg);
-            border-radius: 16px;
-            padding: 1.5rem;
-            border: 1px solid var(--border);
-            text-align: center;
-            transition: all 0.3s;
-            cursor: pointer;
-        }
-        
-        .property-item:hover {
-            transform: translateY(-5px) scale(1.02);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            border-color: var(--primary-blue);
-        }
-        
-        .property-image {
-            height: 120px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            border-radius: 12px;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: 600;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .property-image::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(0,0,0,0.2), transparent);
-        }
 
-        /* Enhanced Trade Page */
-        .trade-container {
-            display: none;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-        
-        .trade-container.active {
-            display: grid;
-            animation: fadeIn 0.5s ease;
-        }
-        
-        .swap-section {
-            background: var(--card-bg);
+        /* Enhanced Swap Interface */
+        .swap-interface {
+            background: rgba(255,255,255,0.03);
             border-radius: 16px;
             padding: 2rem;
             border: 1px solid var(--border);
-            transition: all 0.3s;
+            margin-bottom: 2rem;
         }
         
-        .swap-section:hover {
-            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        .swap-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .swap-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
         
         .swap-box {
             background: rgba(255,255,255,0.05);
-            border-radius: 12px;
+            border-radius: 16px;
             padding: 1.5rem;
             margin-bottom: 1rem;
             border: 1px solid transparent;
             transition: all 0.3s;
+            position: relative;
         }
         
         .swap-box:focus-within {
@@ -308,13 +290,26 @@
             box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.1);
         }
         
-        .swap-header {
+        .swap-box-header {
             display: flex;
             justify-content: space-between;
             margin-bottom: 1rem;
         }
         
-        .token-input {
+        .swap-label {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        .balance {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+        
+        .token-input-row {
             display: flex;
             align-items: center;
             gap: 1rem;
@@ -325,35 +320,161 @@
             background: none;
             border: none;
             color: var(--text-light);
-            font-size: 1.8rem;
+            font-size: 2rem;
             outline: none;
             font-weight: 600;
+            width: 100%;
+        }
+        
+        .token-amount::placeholder {
+            color: var(--text-muted);
         }
         
         .token-selector {
-            background: var(--dark-bg);
+            background: var(--primary-dark);
             border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 0.5rem 1rem;
+            border-radius: 12px;
+            padding: 0.75rem 1rem;
             color: var(--text-light);
             cursor: pointer;
             transition: all 0.3s;
+            font-weight: 500;
+            min-width: 120px;
         }
         
         .token-selector:hover {
             border-color: var(--primary-blue);
         }
         
-        .balance {
-            color: var(--text-muted);
-            font-size: 0.9rem;
+        .percentage-buttons {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
         }
         
-        .get-dreams {
+        .percent-btn {
+            flex: 1;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--border);
+            color: var(--text-light);
+            padding: 0.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+        
+        .percent-btn:hover {
+            background: rgba(255,255,255,0.1);
+        }
+        
+        .percent-btn.active {
+            background: var(--primary-blue);
+            border-color: var(--primary-blue);
+        }
+        
+        .swap-arrow {
             text-align: center;
+            margin: 0.5rem 0;
+        }
+        
+        .swap-arrow-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: var(--primary-blue);
+            color: white;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            font-size: 1.2rem;
+        }
+        
+        .swap-arrow-btn:hover {
+            background: #1d4ed8;
+            transform: rotate(180deg);
+        }
+        
+        .swap-details {
+            background: rgba(255,255,255,0.03);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.75rem;
+        }
+        
+        .detail-label {
             color: var(--text-muted);
-            margin: 1.5rem 0;
-            font-style: italic;
+        }
+        
+        .detail-value {
+            font-weight: 500;
+        }
+        
+        .swap-button {
+            width: 100%;
+            background: var(--primary-blue);
+            color: white;
+            border: none;
+            padding: 1.25rem;
+            border-radius: 16px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            margin-top: 1.5rem;
+            font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        
+        .swap-button:hover:not(:disabled) {
+            background: #1d4ed8;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.3);
+        }
+        
+        .swap-button:disabled {
+            background: var(--text-muted);
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .swap-button.success {
+            background: var(--success);
+        }
+
+        /* Enhanced Transaction History */
+        .transaction-history {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid var(--border);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+        
+        .history-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .history-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
         
         .history-table {
@@ -367,6 +488,7 @@
             color: var(--text-muted);
             border-bottom: 1px solid var(--border);
             font-weight: 500;
+            font-size: 0.9rem;
         }
         
         .history-table td {
@@ -375,71 +497,161 @@
             transition: all 0.3s;
         }
         
-        .history-table tr:hover td {
-            background: rgba(255,255,255,0.05);
-        }
-
-        /* Enhanced Explore Page */
-        .explore-container {
-            display: none;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-        
-        .explore-container.active {
-            display: block;
-            animation: fadeIn 0.5s ease;
-        }
-        
-        .search-filters {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
-        }
-        
-        .filter-btn {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            color: var(--text-light);
-            padding: 0.75rem 1.5rem;
-            border-radius: 8px;
-            cursor: pointer;
+        .history-table tr {
             transition: all 0.3s;
         }
         
-        .filter-btn.active {
-            background: var(--primary-blue);
-            border-color: var(--primary-blue);
+        .history-table tr:hover {
+            background: rgba(255,255,255,0.03);
         }
         
-        .filter-btn:hover:not(.active) {
-            background: rgba(255,255,255,0.1);
-            border-color: var(--primary-blue);
+        .tx-type {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 500;
         }
         
-        .explore-grid {
+        .tx-amount {
+            font-weight: 600;
+        }
+        
+        .tx-positive {
+            color: var(--success);
+        }
+        
+        .tx-negative {
+            color: #ef4444;
+        }
+        
+        .tx-date {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Enhanced Sidebar Components */
+        .portfolio-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 1.5rem;
+            border: 1px solid var(--border);
+        }
+        
+        .portfolio-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .portfolio-title {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        .portfolio-value {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--text-light), var(--primary-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .token-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .token-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background: rgba(255,255,255,0.03);
+            border-radius: 12px;
+            transition: all 0.3s;
+        }
+        
+        .token-item:hover {
+            background: rgba(255,255,255,0.06);
+            transform: translateY(-2px);
+        }
+        
+        .token-info {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .token-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: white;
+        }
+        
+        .token-details {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .token-name {
+            font-weight: 600;
+        }
+        
+        .token-balance {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+        
+        .token-value {
+            font-weight: 600;
+        }
+
+        /* Explore Page Styles */
+        .explore-hero {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .explore-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--text-light), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .properties-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
             gap: 2rem;
         }
         
-        .explore-card {
+        .property-card {
             background: var(--card-bg);
-            border-radius: 16px;
+            border-radius: 20px;
             overflow: hidden;
             border: 1px solid var(--border);
             transition: all 0.3s;
             cursor: pointer;
         }
         
-        .explore-card:hover {
-            transform: translateY(-8px) scale(1.02);
+        .property-card:hover {
+            transform: translateY(-8px);
             box-shadow: 0 15px 40px rgba(0,0,0,0.3);
             border-color: var(--primary-blue);
         }
         
-        .card-image {
+        .property-image {
             height: 200px;
             background: linear-gradient(135deg, #667eea, #764ba2);
             display: flex;
@@ -449,30 +661,19 @@
             font-weight: 600;
             font-size: 1.5rem;
             position: relative;
-            overflow: hidden;
         }
         
-        .card-image::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(0,0,0,0.3), transparent);
-        }
-        
-        .card-content {
+        .property-content {
             padding: 1.5rem;
         }
         
-        .card-actions {
+        .property-actions {
             display: flex;
             gap: 0.5rem;
             margin-top: 1.5rem;
         }
         
-        .card-btn {
+        .property-btn {
             flex: 1;
             padding: 0.75rem;
             border: 1px solid var(--border);
@@ -484,101 +685,73 @@
             font-weight: 500;
         }
         
-        .card-btn.primary {
+        .property-btn.primary {
             background: var(--primary-blue);
             border-color: var(--primary-blue);
         }
         
-        .card-btn:hover {
+        .property-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(0,0,0,0.2);
         }
 
-        /* Enhanced Pool Page */
-        .pool-container {
-            display: none;
+        /* Pool Page Styles */
+        .pool-hero {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .pool-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--text-light), var(--primary-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .pool-interface {
             max-width: 600px;
             margin: 0 auto;
-        }
-        
-        .pool-container.active {
-            display: block;
-            animation: fadeIn 0.5s ease;
-        }
-        
-        .pool-card {
             background: var(--card-bg);
-            border-radius: 16px;
+            border-radius: 20px;
             padding: 2rem;
             border: 1px solid var(--border);
-            transition: all 0.3s;
         }
         
-        .pool-card:hover {
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        }
-        
-        .token-pair {
+        .pool-inputs {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 1rem;
             margin-bottom: 2rem;
         }
         
-        .token-box {
+        .pool-box {
             background: rgba(255,255,255,0.05);
             border-radius: 12px;
             padding: 1.5rem;
-            border: 1px solid transparent;
-            transition: all 0.3s;
         }
         
-        .token-box:focus-within {
-            border-color: var(--primary-blue);
-        }
-        
-        .fee-tier {
+        .pool-details {
             background: rgba(255,255,255,0.05);
             border-radius: 12px;
             padding: 1.5rem;
             margin-bottom: 2rem;
-            border: 1px solid transparent;
-            transition: all 0.3s;
-        }
-        
-        .fee-tier:hover {
-            border-color: var(--primary-blue);
-        }
-        
-        .continue-btn {
-            width: 100%;
-            background: var(--primary-blue);
-            color: white;
-            border: none;
-            padding: 1.2rem;
-            border-radius: 12px;
-            font-size: 1.1rem;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s;
-        }
-        
-        .continue-btn:hover {
-            background: #1d4ed8;
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.3);
         }
 
-        /* Book Page */
-        .book-container {
-            display: none;
-            max-width: 1000px;
-            margin: 0 auto;
+        /* Book Page Styles */
+        .book-hero {
+            text-align: center;
+            margin-bottom: 3rem;
         }
         
-        .book-container.active {
-            display: block;
-            animation: fadeIn 0.5s ease;
+        .book-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--text-light), var(--success));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
         
         .booking-flow {
@@ -589,27 +762,14 @@
         
         .property-details {
             background: var(--card-bg);
-            border-radius: 16px;
+            border-radius: 20px;
             padding: 2rem;
             border: 1px solid var(--border);
         }
         
-        .property-hero {
-            height: 200px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            border-radius: 12px;
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.8rem;
-            font-weight: 600;
-        }
-        
         .booking-form {
             background: var(--card-bg);
-            border-radius: 16px;
+            border-radius: 20px;
             padding: 2rem;
             border: 1px solid var(--border);
         }
@@ -646,63 +806,17 @@
             gap: 1rem;
         }
 
-        /* Wallet Modal */
-        .wallet-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0,0,0,0.8);
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-        }
-        
-        .modal-content {
-            background: var(--card-bg);
-            padding: 2rem;
-            border-radius: 20px;
-            max-width: 400px;
-            width: 90%;
-            text-align: center;
-            animation: modalSlideIn 0.3s ease;
-        }
-        
-        @keyframes modalSlideIn {
-            from { opacity: 0; transform: scale(0.9); }
-            to { opacity: 1; transform: scale(1); }
-        }
-        
-        .wallet-option {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 1.2rem;
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            margin-bottom: 1rem;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .wallet-option:hover {
-            background: rgba(255,255,255,0.1);
-            border-color: var(--primary-blue);
-            transform: translateY(-2px);
-        }
-
         /* Success States & Animations */
         .success-message {
             background: var(--success);
             color: white;
-            padding: 1rem;
-            border-radius: 8px;
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
             margin: 1rem 0;
             text-align: center;
             display: none;
             animation: fadeIn 0.5s ease;
+            font-weight: 500;
         }
         
         .pulse {
@@ -715,26 +829,71 @@
             100% { transform: scale(1); }
         }
         
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Connected state */
-        .connected-address {
-            background: var(--dark-bg);
+        /* Demo Indicator */
+        .demo-indicator {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--accent);
+            color: white;
             padding: 0.75rem 1.5rem;
             border-radius: 12px;
-            font-family: monospace;
+            font-weight: 500;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Toast Notifications */
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--card-bg);
+            color: var(--text-light);
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            z-index: 1001;
+            animation: slideInRight 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            border-left: 4px solid var(--primary-blue);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            max-width: 350px;
+        }
+        
+        .toast.success {
+            border-left-color: var(--success);
+        }
+        
+        .toast.warning {
+            border-left-color: var(--warning);
+        }
+        
+        @keyframes slideInRight {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        /* Connected state */
+        .connected-address {
+            background: var(--primary-dark);
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            font-family: 'Monaco', 'Consolas', monospace;
             display: flex;
             align-items: center;
             gap: 0.5rem;
             border: 1px solid var(--primary-blue);
+            font-size: 0.9rem;
         }
         
         .network-indicator {
@@ -745,231 +904,271 @@
             animation: pulse 2s infinite;
         }
 
-        /* Active states */
-        .page {
-            display: none;
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .trade-dashboard {
+                grid-template-columns: 1fr;
+            }
+            
+            .trade-sidebar {
+                grid-template-columns: 1fr 1fr;
+                display: grid;
+            }
+            
+            .booking-flow {
+                grid-template-columns: 1fr;
+            }
         }
         
-        .page.active {
-            display: block;
-        }
-
-        /* Toast Notifications */
-        .toast {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: var(--success);
-            color: white;
-            padding: 1rem 1.5rem;
-            border-radius: 8px;
-            z-index: 1001;
-            animation: slideInRight 0.3s ease;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-        }
-        
-        @keyframes slideInRight {
-            from { transform: translateX(100%); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem;
+            }
+            
+            .nav-links {
+                order: 3;
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .nav-right {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .search-bar {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .trade-hero h1, .explore-hero h1, .pool-hero h1, .book-hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .token-input-row {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .token-selector {
+                width: 100%;
+            }
+            
+            .pool-inputs {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Demo Banner -->
+    <div class="demo-banner">
+        🚀 INTERACTIVE DEMO - This is a functional prototype. Connect wallet to enable all features.
+    </div>
+
     <!-- Enhanced Navigation -->
     <nav class="navbar">
         <div class="nav-logo">Nightz</div>
         <div class="nav-links">
-            <a href="#" class="nav-link active" data-page="home">Trade</a>
-            <a href="#" class="nav-link" data-page="explore">Explore</a>
-            <a href="#" class="nav-link" data-page="pool">Pool</a>
-            <a href="#" class="nav-link" data-page="book">Book</a>
+            <a href="#" class="nav-link active" data-page="trade">
+                <i class="fas fa-exchange-alt"></i>
+                Trade
+                <span class="nav-badge">Live</span>
+            </a>
+            <a href="#" class="nav-link" data-page="explore">
+                <i class="fas fa-compass"></i>
+                Explore
+            </a>
+            <a href="#" class="nav-link" data-page="pool">
+                <i class="fas fa-water"></i>
+                Pool
+            </a>
+            <a href="#" class="nav-link" data-page="book">
+                <i class="fas fa-calendar-check"></i>
+                Book
+            </a>
         </div>
         <div class="nav-right">
-            <input type="text" class="search-bar" placeholder="Search properties...">
-            <button class="connect-wallet" id="connectWallet">Connect wallet</button>
+            <input type="text" class="search-bar" placeholder="Search tokens, properties...">
+            <button class="connect-wallet" id="connectWallet">
+                <i class="fas fa-wallet"></i>
+                Connect wallet
+            </button>
         </div>
     </nav>
 
-    <!-- Home Page (Trade) -->
-    <section id="home-page" class="page active">
+    <!-- Trade Page (Default & Focus) -->
+    <section id="trade-page" class="page active">
         <div class="main-container">
-            <!-- Enhanced Hero Section -->
-            <div class="hero">
-                <h1>Buy, sell and redeem<br>nights at properties<br>worldwide.</h1>
-                <p>One token = One night in your dream destination</p>
-                <div class="hero-buttons">
-                    <button class="hero-btn" id="heroTradeBtn">Trade</button>
-                    <button class="hero-btn secondary" id="heroBookBtn">Book</button>
-                </div>
+            <!-- Trade Hero -->
+            <div class="trade-hero">
+                <h1>Trade Tokenized Stays</h1>
+                <p>Swap between USDT and NIGHTZ tokens to unlock luxury properties worldwide. Experience seamless trading with real-time simulation.</p>
             </div>
 
-            <!-- Quick Sections -->
-            <div class="quick-sections">
-                <!-- Your Booking -->
-                <div class="section-card">
-                    <div class="section-header">
-                        <h3>Your Booking</h3>
-                        <a href="#" class="view-all" id="viewAllBookings">View all ></a>
-                    </div>
-                    <div class="booking-item" id="currentBooking">
-                        <div class="property-image">Beachfront Villa</div>
-                        <p>Jun 23 - Jun 27</p>
-                        <button class="card-btn primary" style="margin-top: 1rem;" id="manageBookingBtn">Manage Booking</button>
-                    </div>
-                </div>
-
-                <!-- Property Sales -->
-                <div class="section-card">
-                    <div class="section-header">
-                        <h3>Upcoming Property sales</h3>
-                        <a href="#" class="view-all">View all ></a>
-                    </div>
-                    <div class="property-item" id="featuredProperty">
-                        <div class="property-image pulse">Brisa Azul</div>
-                        <p>San Andres, Colombia</p>
-                        <p style="color: var(--primary-blue); margin-top: 0.5rem;">Available soon<br>Oct 15 - Oct 20</p>
-                        <button class="card-btn primary" style="margin-top: 1rem;" id="notifyMeBtn">Notify Me</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Explore Properties -->
-            <div class="section-card">
-                <div class="section-header">
-                    <h3>Explore Properties</h3>
-                    <a href="#" class="view-all" id="viewAllProperties">View all ></a>
-                </div>
-                <div class="properties-grid">
-                    <div class="property-item" data-property="beachfront">
-                        <div class="property-image">Beachfront Villa</div>
-                        <p>Malibu, USA</p>
-                    </div>
-                    <div class="property-item" data-property="casa-akaw">
-                        <div class="property-image">Casa Akaw</div>
-                        <p>La Saladita, Mexico</p>
-                    </div>
-                    <div class="property-item" data-property="hillside">
-                        <div class="property-image">Hillside Villa</div>
-                        <p>Positano, Italy</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Trade Page -->
-    <section id="trade-page" class="page">
-        <div class="main-container">
-            <div class="trade-container active">
-                <!-- Swap Section -->
-                <div class="swap-section">
-                    <h2 style="margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
-                        <i class="fas fa-exchange-alt"></i> Swap
-                    </h2>
-                    
-                    <!-- Sell -->
-                    <div class="swap-box">
+            <!-- Interactive Trade Dashboard -->
+            <div class="trade-dashboard">
+                <!-- Main Trade Interface -->
+                <div class="trade-main">
+                    <!-- Swap Interface -->
+                    <div class="swap-interface">
                         <div class="swap-header">
-                            <span style="font-weight: 600;">Sell</span>
-                            <span class="balance">Balance: <span id="usdtBalance">1000</span> USDT</span>
+                            <div class="swap-title">
+                                <i class="fas fa-exchange-alt"></i>
+                                Swap Tokens
+                            </div>
                         </div>
-                        <div class="token-input">
-                            <input type="number" class="token-amount" id="sellAmount" value="0" min="0" step="0.1">
-                            <select class="token-selector" id="sellToken">
-                                <option>USDT</option>
-                            </select>
-                        </div>
-                        <div style="display: flex; gap: 0.5rem; margin-top: 0.5rem;">
-                            <button class="card-btn" style="padding: 0.25rem 0.5rem; font-size: 0.8rem;" data-percent="25">25%</button>
-                            <button class="card-btn" style="padding: 0.25rem 0.5rem; font-size: 0.8rem;" data-percent="50">50%</button>
-                            <button class="card-btn" style="padding: 0.25rem 0.5rem; font-size: 0.8rem;" data-percent="75">75%</button>
-                            <button class="card-btn primary" style="padding: 0.25rem 0.5rem; font-size: 0.8rem;" id="maxBtn">MAX</button>
-                        </div>
-                    </div>
 
-                    <!-- Swap Arrow -->
-                    <div style="text-align: center; margin: 0.5rem 0;">
-                        <div style="display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; background: var(--primary-blue); border-radius: 50%; cursor: pointer;" id="switchTokens">
-                            <i class="fas fa-arrow-down" style="color: white;"></i>
+                        <!-- Sell Box -->
+                        <div class="swap-box">
+                            <div class="swap-box-header">
+                                <span class="swap-label">You Sell</span>
+                                <span class="balance">
+                                    <i class="fas fa-wallet"></i>
+                                    Balance: <span id="usdtBalance">1,000.00</span> USDT
+                                </span>
+                            </div>
+                            <div class="token-input-row">
+                                <input type="number" class="token-amount" id="sellAmount" placeholder="0.0" min="0" step="0.1">
+                                <select class="token-selector" id="sellToken">
+                                    <option>USDT</option>
+                                </select>
+                            </div>
+                            <div class="percentage-buttons">
+                                <button class="percent-btn" data-percent="25">25%</button>
+                                <button class="percent-btn" data-percent="50">50%</button>
+                                <button class="percent-btn" data-percent="75">75%</button>
+                                <button class="percent-btn active" id="maxBtn">MAX</button>
+                            </div>
                         </div>
-                    </div>
 
-                    <!-- Buy -->
-                    <div class="swap-box">
-                        <div class="swap-header">
-                            <span style="font-weight: 600;">Buy</span>
-                            <span class="balance">Balance: <span id="nightzBalance">253</span> NIGHTZ</span>
+                        <!-- Swap Arrow -->
+                        <div class="swap-arrow">
+                            <button class="swap-arrow-btn" id="switchTokens">
+                                <i class="fas fa-arrow-down"></i>
+                            </button>
                         </div>
-                        <div class="token-input">
-                            <input type="number" class="token-amount" id="buyAmount" value="0" min="0" readonly style="background: rgba(255,255,255,0.1);">
-                            <select class="token-selector" id="buyToken">
-                                <option>NIGHTZ</option>
-                            </select>
-                        </div>
-                    </div>
 
-                    <div class="get-dreams">
-                        <i class="fas fa-gem"></i> Get dreams<br>Trade tokens seamlessly with just a 1% fee.
-                    </div>
-
-                    <!-- Success Message -->
-                    <div class="success-message" id="swapSuccessMessage">
-                        <i class="fas fa-check-circle"></i> Trade executed successfully!
-                    </div>
-
-                    <button class="continue-btn" id="swapButton">
-                        <i class="fas fa-exchange-alt"></i> Swap Tokens
-                    </button>
-
-                    <!-- Trade Details -->
-                    <div style="background: rgba(255,255,255,0.05); padding: 1rem; border-radius: 8px; margin-top: 1rem; font-size: 0.9rem;">
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-                            <span>Exchange Rate</span>
-                            <span>1 USDT = 5 NIGHTZ</span>
+                        <!-- Buy Box -->
+                        <div class="swap-box">
+                            <div class="swap-box-header">
+                                <span class="swap-label">You Buy</span>
+                                <span class="balance">
+                                    <i class="fas fa-wallet"></i>
+                                    Balance: <span id="nightzBalance">253.00</span> NIGHTZ
+                                </span>
+                            </div>
+                            <div class="token-input-row">
+                                <input type="number" class="token-amount" id="buyAmount" placeholder="0.0" readonly>
+                                <select class="token-selector" id="buyToken">
+                                    <option>NIGHTZ</option>
+                                </select>
+                            </div>
                         </div>
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-                            <span>Fee (1%)</span>
-                            <span id="feeAmount">0 NIGHTZ</span>
+
+                        <!-- Swap Details -->
+                        <div class="swap-details">
+                            <div class="detail-row">
+                                <span class="detail-label">Exchange Rate</span>
+                                <span class="detail-value">1 USDT = 5.00 NIGHTZ</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Fee (1%)</span>
+                                <span class="detail-value" id="feeAmount">0.00 NIGHTZ</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Minimum Received</span>
+                                <span class="detail-value" id="minReceived">0.00 NIGHTZ</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Price Impact</span>
+                                <span class="detail-value">< 0.01%</span>
+                            </div>
                         </div>
-                        <div style="display: flex; justify-content: space-between;">
-                            <span>Minimum received</span>
-                            <span id="minReceived">0 NIGHTZ</span>
+
+                        <!-- Success Message -->
+                        <div class="success-message" id="swapSuccessMessage">
+                            <i class="fas fa-check-circle"></i> Trade executed successfully! Tokens have been swapped.
                         </div>
+
+                        <!-- Swap Button -->
+                        <button class="swap-button" id="swapButton">
+                            <i class="fas fa-exchange-alt"></i> Enter Amount to Swap
+                        </button>
                     </div>
                 </div>
 
-                <!-- Transaction History -->
-                <div class="swap-section">
-                    <h2 style="margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
-                        <i class="fas fa-history"></i> Transaction History
-                    </h2>
-                    <table class="history-table">
-                        <thead>
-                            <tr>
-                                <th>Pair</th>
-                                <th>Amount</th>
-                                <th>Date</th>
-                            </tr>
-                        </thead>
-                        <tbody id="historyBody">
-                            <tr>
-                                <td>USDT</td>
-                                <td>1000 NIGHTZ</td>
-                                <td>1 day ago</td>
-                            </tr>
-                            <tr>
-                                <td>CASA AKAW</td>
-                                <td>0.39 ETH</td>
-                                <td>5 days ago</td>
-                            </tr>
-                            <tr>
-                                <td>USDT</td>
-                                <td>3000 NIGHTZ</td>
-                                <td>2 weeks ago</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <!-- Trade Sidebar -->
+                <div class="trade-sidebar">
+                    <!-- Portfolio Card -->
+                    <div class="portfolio-card">
+                        <div class="portfolio-header">
+                            <div class="portfolio-title">Your Portfolio</div>
+                            <i class="fas fa-chart-line" style="color: var(--primary-blue);"></i>
+                        </div>
+                        <div class="portfolio-value">$12,458.32</div>
+                        <div class="token-list">
+                            <div class="token-item">
+                                <div class="token-info">
+                                    <div class="token-icon">U</div>
+                                    <div class="token-details">
+                                        <div class="token-name">USDT</div>
+                                        <div class="token-balance" id="sidebarUsdtBalance">1,000.00 USDT</div>
+                                    </div>
+                                </div>
+                                <div class="token-value">$1,000.00</div>
+                            </div>
+                            <div class="token-item">
+                                <div class="token-info">
+                                    <div class="token-icon">N</div>
+                                    <div class="token-details">
+                                        <div class="token-name">NIGHTZ</div>
+                                        <div class="token-balance" id="sidebarNightzBalance">253.00 NIGHTZ</div>
+                                    </div>
+                                </div>
+                                <div class="token-value">$1,265.00</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+            </div>
+
+            <!-- Enhanced Transaction History -->
+            <div class="transaction-history">
+                <div class="history-header">
+                    <div class="history-title">
+                        <i class="fas fa-history"></i>
+                        Transaction History
+                    </div>
+                </div>
+                <table class="history-table">
+                    <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Amount</th>
+                            <th>Value</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody id="historyBody">
+                        <tr>
+                            <td>
+                                <div class="tx-type">
+                                    <i class="fas fa-exchange-alt" style="color: var(--primary-blue);"></i>
+                                    Swap
+                                </div>
+                            </td>
+                            <td>
+                                <div class="tx-amount tx-negative">-1,000 USDT</div>
+                                <div class="tx-amount tx-positive">+5,000 NIGHTZ</div>
+                            </td>
+                            <td>$5,000.00</td>
+                            <td class="tx-date">1 day ago</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </section>
@@ -977,59 +1176,62 @@
     <!-- Explore Page -->
     <section id="explore-page" class="page">
         <div class="main-container">
-            <div class="explore-container active">
-                <h1 style="margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
-                    <i class="fas fa-compass"></i> Nightz Explore
-                </h1>
-                
-                <div class="search-filters">
-                    <input type="text" class="search-bar" placeholder="Search properties" style="flex: 1;">
-                    <button class="filter-btn"><i class="fas fa-crown"></i> Membership</button>
-                    <button class="filter-btn"><i class="fas fa-image"></i> NFT Available</button>
-                    <button class="filter-btn"><i class="fas fa-map"></i> Maps</button>
-                    <button class="filter-btn active"><i class="fas fa-tag"></i> Sale</button>
+            <div class="explore-hero">
+                <h1>Explore Luxury Properties</h1>
+                <p>Discover and invest in tokenized luxury stays around the world</p>
+            </div>
+
+            <div class="properties-grid">
+                <!-- Property 1 -->
+                <div class="property-card" data-property="beachfront">
+                    <div class="property-image">Beachfront Villa</div>
+                    <div class="property-content">
+                        <h3>Beachfront Villa</h3>
+                        <p style="color: var(--text-muted); margin: 0.5rem 0;">Malibu, USA</p>
+                        <p style="font-size: 0.9rem; margin-bottom: 1rem;">Luxury beachfront property with private access and stunning ocean views. Perfect for romantic getaways.</p>
+                        <div class="property-actions">
+                            <button class="property-btn" data-action="book">
+                                <i class="fas fa-calendar"></i> Book Stay
+                            </button>
+                            <button class="property-btn primary" data-action="trade">
+                                <i class="fas fa-exchange-alt"></i> Trade Token
+                            </button>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="explore-grid">
-                    <!-- Property 1 -->
-                    <div class="explore-card" data-property="beachfront">
-                        <div class="card-image">Beachfront Villa</div>
-                        <div class="card-content">
-                            <h3>Beachfront Villa</h3>
-                            <p style="color: var(--text-muted); margin: 0.5rem 0;">Malibu, USA</p>
-                            <p style="font-size: 0.9rem;">Luxury beachfront property with private access and stunning ocean views. Perfect for romantic getaways.</p>
-                            <div class="card-actions">
-                                <button class="card-btn" data-action="book"><i class="fas fa-calendar"></i> Book</button>
-                                <button class="card-btn primary" data-action="trade"><i class="fas fa-exchange-alt"></i> Trade</button>
-                            </div>
+                <!-- Property 2 -->
+                <div class="property-card" data-property="casa-akaw">
+                    <div class="property-image">Casa Akaw</div>
+                    <div class="property-content">
+                        <h3>Casa Akaw</h3>
+                        <p style="color: var(--text-muted); margin: 0.5rem 0;">La Saladita, Mexico</p>
+                        <p style="font-size: 0.9rem; margin-bottom: 1rem;">Modern beach house designed for surf enthusiasts. Rooftop terrace with panoramic ocean views.</p>
+                        <div class="property-actions">
+                            <button class="property-btn" data-action="book">
+                                <i class="fas fa-calendar"></i> Book Stay
+                            </button>
+                            <button class="property-btn primary" data-action="trade">
+                                <i class="fas fa-exchange-alt"></i> Trade Token
+                            </button>
                         </div>
                     </div>
+                </div>
 
-                    <!-- Property 2 -->
-                    <div class="explore-card" data-property="casa-akaw">
-                        <div class="card-image">Casa Akaw</div>
-                        <div class="card-content">
-                            <h3>Casa Akaw</h3>
-                            <p style="color: var(--text-muted); margin: 0.5rem 0;">La Saladita, Mexico</p>
-                            <p style="font-size: 0.9rem;">Modern beach house designed for surf enthusiasts. Rooftop terrace with panoramic ocean views.</p>
-                            <div class="card-actions">
-                                <button class="card-btn" data-action="look"><i class="fas fa-eye"></i> Look</button>
-                                <button class="card-btn primary" data-action="track"><i class="fas fa-star"></i> Track</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Property 3 -->
-                    <div class="explore-card" data-property="marina-sands">
-                        <div class="card-image">Marina Sands</div>
-                        <div class="card-content">
-                            <h3>Marina Sands</h3>
-                            <p style="color: var(--text-muted); margin: 0.5rem 0;">Sidney, Australia</p>
-                            <p style="font-size: 0.9rem;">Iconic waterfront property with luxury amenities and breathtaking harbor views.</p>
-                            <div class="card-actions">
-                                <button class="card-btn" data-action="book"><i class="fas fa-calendar"></i> Book</button>
-                                <button class="card-btn primary" data-action="trade"><i class="fas fa-exchange-alt"></i> Trade</button>
-                            </div>
+                <!-- Property 3 -->
+                <div class="property-card" data-property="hillside">
+                    <div class="property-image">Hillside Villa</div>
+                    <div class="property-content">
+                        <h3>Hillside Villa</h3>
+                        <p style="color: var(--text-muted); margin: 0.5rem 0;">Positano, Italy</p>
+                        <p style="font-size: 0.9rem; margin-bottom: 1rem;">Cliffside villa with panoramic ocean views and private pool. Perfect for luxury retreats.</p>
+                        <div class="property-actions">
+                            <button class="property-btn" data-action="book">
+                                <i class="fas fa-calendar"></i> Book Stay
+                            </button>
+                            <button class="property-btn primary" data-action="trade">
+                                <i class="fas fa-exchange-alt"></i> Trade Token
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -1040,62 +1242,58 @@
     <!-- Pool Page -->
     <section id="pool-page" class="page">
         <div class="main-container">
-            <div class="pool-container active">
-                <h1 style="margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
-                    <i class="fas fa-water"></i> Create a new pool
-                </h1>
-                <p style="color: var(--text-muted); margin-bottom: 2rem;">Find a pair to add liquidity to the Nightz protocol</p>
+            <div class="pool-hero">
+                <h1>Provide Liquidity</h1>
+                <p>Add liquidity to trading pairs and earn fees from trades</p>
+            </div>
+
+            <div class="pool-interface">
+                <h2 style="margin-bottom: 1.5rem;">Create Liquidity Pool</h2>
                 
-                <div class="pool-card">
-                    <h3 style="margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
-                        <i class="fas fa-plus-circle"></i> Add a token
-                    </h3>
+                <div class="pool-inputs">
+                    <div class="pool-box">
+                        <div style="color: var(--text-muted); margin-bottom: 0.5rem;">Token 1</div>
+                        <select class="token-selector" style="width: 100%; margin-bottom: 1rem;">
+                            <option>USDT</option>
+                        </select>
+                        <input type="number" class="form-input" placeholder="0.0" id="poolToken1Amount">
+                        <div style="color: var(--text-muted); font-size: 0.9rem; margin-top: 0.5rem;">Balance: 1,000.00 USDT</div>
+                    </div>
                     
-                    <div class="token-pair">
-                        <div class="token-box">
-                            <div style="color: var(--text-muted); margin-bottom: 0.5rem;">Select a token</div>
-                            <div style="display: flex; justify-content: space-between; align-items: center;">
-                                <select class="token-selector">
-                                    <option>USDT</option>
-                                </select>
-                                <span class="balance">Balance 1000 USDT</span>
-                            </div>
-                            <input type="number" class="form-input" style="margin-top: 1rem;" placeholder="0.0" id="usdtPoolAmount">
-                        </div>
-                        
-                        <div class="token-box">
-                            <div style="color: var(--text-muted); margin-bottom: 0.5rem;">Select a token</div>
-                            <select class="token-selector">
-                                <option>NIGHTZ</option>
-                            </select>
-                            <input type="number" class="form-input" style="margin-top: 1rem;" placeholder="0.0" id="nightzPoolAmount">
-                        </div>
+                    <div class="pool-box">
+                        <div style="color: var(--text-muted); margin-bottom: 0.5rem;">Token 2</div>
+                        <select class="token-selector" style="width: 100%; margin-bottom: 1rem;">
+                            <option>NIGHTZ</option>
+                        </select>
+                        <input type="number" class="form-input" placeholder="0.0" id="poolToken2Amount">
+                        <div style="color: var(--text-muted); font-size: 0.9rem; margin-top: 0.5rem;">Balance: 253.00 NIGHTZ</div>
                     </div>
-
-                    <div class="fee-tier">
-                        <h3 style="margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
-                            <i class="fas fa-chart-line"></i> Fee tier
-                        </h3>
-                        <p style="color: var(--text-muted); margin-bottom: 1rem;">The amount earned providing liquidity. Choose an amount that suits your risk tolerance and strategy.</p>
-                        
-                        <div style="display: flex; justify-content: space-between; align-items: center; background: var(--primary-blue); padding: 1.5rem; border-radius: 12px; cursor: pointer;" id="feeTierOption">
-                            <div>
-                                <div style="font-weight: 600;">0.05% fee tier</div>
-                                <div style="font-size: 0.9rem; color: var(--text-light);">Best for stable pairs</div>
-                            </div>
-                            <div style="color: var(--text-light);">More <i class="fas fa-chevron-right"></i></div>
-                        </div>
-                    </div>
-
-                    <!-- Pool Success Message -->
-                    <div class="success-message" id="poolSuccessMessage">
-                        <i class="fas fa-check-circle"></i> Liquidity pool created successfully!
-                    </div>
-
-                    <button class="continue-btn" id="createPoolBtn">
-                        <i class="fas fa-plus-circle"></i> Create Pool
-                    </button>
                 </div>
+
+                <div class="pool-details">
+                    <h3 style="margin-bottom: 1rem;">Pool Details</h3>
+                    <div class="detail-row">
+                        <span class="detail-label">Pool Share</span>
+                        <span class="detail-value">0%</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">LP Tokens</span>
+                        <span class="detail-value">0</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Estimated APR</span>
+                        <span class="detail-value">12-18%</span>
+                    </div>
+                </div>
+
+                <!-- Success Message -->
+                <div class="success-message" id="poolSuccessMessage">
+                    <i class="fas fa-check-circle"></i> Liquidity pool created successfully!
+                </div>
+
+                <button class="swap-button" id="createPoolBtn">
+                    <i class="fas fa-plus-circle"></i> Create Pool
+                </button>
             </div>
         </div>
     </section>
@@ -1103,238 +1301,163 @@
     <!-- Book Page -->
     <section id="book-page" class="page">
         <div class="main-container">
-            <div class="book-container active">
-                <h1 style="margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
-                    <i class="fas fa-calendar-check"></i> Book Your Stay
-                </h1>
-                
-                <div class="booking-flow">
-                    <!-- Property Details -->
-                    <div class="property-details">
-                        <div class="property-hero" id="bookPropertyImage">Casa Akaw</div>
-                        <h3 id="bookPropertyName">Casa Akaw</h3>
-                        <p style="color: var(--text-muted); margin-bottom: 1.5rem;" id="bookPropertyLocation">La Saladita, Mexico</p>
-                        
-                        <div style="margin-bottom: 1.5rem;">
-                            <h4 style="margin-bottom: 1rem;">Amenities</h4>
-                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
-                                <div><i class="fas fa-user"></i> 2 guests</div>
-                                <div><i class="fas fa-bed"></i> 1 room</div>
-                                <div><i class="fas fa-bed"></i> 1 queen size bed</div>
-                                <div><i class="fas fa-bath"></i> 1 bath</div>
-                                <div><i class="fas fa-swimming-pool"></i> Pool</div>
-                                <div><i class="fas fa-wifi"></i> WiFi</div>
-                            </div>
-                        </div>
-                        
-                        <div>
-                            <h4 style="margin-bottom: 1rem;">Description</h4>
-                            <p style="color: var(--text-muted); font-size: 0.9rem;">
-                                This exclusive beach house offers stunning ocean views, a private terrace, and luxury amenities designed for unforgettable stays. Perfect for surfers and beach lovers.
-                            </p>
+            <div class="book-hero">
+                <h1>Book Your Stay</h1>
+                <p>Redeem your NIGHTZ tokens for luxury accommodations</p>
+            </div>
+
+            <div class="booking-flow">
+                <!-- Property Details -->
+                <div class="property-details">
+                    <div class="property-image" style="border-radius: 12px; margin-bottom: 1.5rem;">Casa Akaw</div>
+                    <h3 id="bookPropertyName">Casa Akaw</h3>
+                    <p style="color: var(--text-muted); margin-bottom: 1.5rem;" id="bookPropertyLocation">La Saladita, Mexico</p>
+                    
+                    <div style="margin-bottom: 1.5rem;">
+                        <h4 style="margin-bottom: 1rem;">Amenities</h4>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
+                            <div><i class="fas fa-user"></i> 2 guests</div>
+                            <div><i class="fas fa-bed"></i> 1 room</div>
+                            <div><i class="fas fa-bed"></i> 1 queen size bed</div>
+                            <div><i class="fas fa-bath"></i> 1 bath</div>
+                            <div><i class="fas fa-swimming-pool"></i> Pool</div>
+                            <div><i class="fas fa-wifi"></i> WiFi</div>
                         </div>
                     </div>
+                    
+                    <div>
+                        <h4 style="margin-bottom: 1rem;">Description</h4>
+                        <p style="color: var(--text-muted); font-size: 0.9rem;">
+                            This exclusive beach house offers stunning ocean views, a private terrace, and luxury amenities designed for unforgettable stays. Perfect for surfers and beach lovers.
+                        </p>
+                    </div>
+                </div>
 
-                    <!-- Booking Form -->
-                    <div class="booking-form">
-                        <h3 style="margin-bottom: 1.5rem;">Booking Details</h3>
-                        
-                        <div class="form-group">
-                            <label class="form-label">Dates</label>
-                            <div class="date-inputs">
-                                <div>
-                                    <div style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 0.5rem;">Check in</div>
-                                    <input type="date" class="form-input" id="checkInDate">
-                                </div>
-                                <div>
-                                    <div style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 0.5rem;">Check out</div>
-                                    <input type="date" class="form-input" id="checkOutDate">
-                                </div>
+                <!-- Booking Form -->
+                <div class="booking-form">
+                    <h3 style="margin-bottom: 1.5rem;">Booking Details</h3>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Dates</label>
+                        <div class="date-inputs">
+                            <div>
+                                <div style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 0.5rem;">Check in</div>
+                                <input type="date" class="form-input" id="checkInDate">
+                            </div>
+                            <div>
+                                <div style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 0.5rem;">Check out</div>
+                                <input type="date" class="form-input" id="checkOutDate">
                             </div>
                         </div>
-                        
-                        <div class="form-group">
-                            <label class="form-label">Guests</label>
-                            <select class="form-input" id="guestCount">
-                                <option>1 guest</option>
-                                <option selected>2 guests</option>
-                                <option>3 guests</option>
-                                <option>4 guests</option>
-                            </select>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label class="form-label">Name</label>
-                            <input type="text" class="form-input" id="guestName" placeholder="Your full name">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label class="form-label">Email</label>
-                            <input type="email" class="form-input" id="guestEmail" placeholder="Your email address">
-                        </div>
-                        
-                        <!-- Booking Success Message -->
-                        <div class="success-message" id="bookingSuccessMessage">
-                            <i class="fas fa-check-circle"></i> Booking confirmed successfully!
-                        </div>
-
-                        <button class="continue-btn" id="confirmBookingBtn">
-                            <i class="fas fa-lock"></i> Confirm Booking
-                        </button>
-                        
-                        <div style="text-align: center; margin-top: 1.5rem; color: var(--text-muted); font-size: 0.9rem;">
-                            <i class="fas fa-shield-alt"></i> Your booking is secure and encrypted
-                        </div>
                     </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Guests</label>
+                        <select class="form-input" id="guestCount">
+                            <option>1 guest</option>
+                            <option selected>2 guests</option>
+                            <option>3 guests</option>
+                            <option>4 guests</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Name</label>
+                        <input type="text" class="form-input" id="guestName" placeholder="Your full name">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Email</label>
+                        <input type="email" class="form-input" id="guestEmail" placeholder="Your email address">
+                    </div>
+                    
+                    <div class="detail-row" style="margin: 1.5rem 0;">
+                        <span class="detail-label">Cost</span>
+                        <span class="detail-value">50 NIGHTZ</span>
+                    </div>
+                    
+                    <!-- Success Message -->
+                    <div class="success-message" id="bookingSuccessMessage">
+                        <i class="fas fa-check-circle"></i> Booking confirmed successfully!
+                    </div>
+
+                    <button class="swap-button" id="confirmBookingBtn">
+                        <i class="fas fa-lock"></i> Confirm Booking
+                    </button>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Wallet Modal -->
-    <div class="wallet-modal" id="walletModal">
-        <div class="modal-content">
-            <h3 style="margin-bottom: 1rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
-                <i class="fas fa-wallet"></i> Nightz
-            </h3>
-            <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Connect your wallet</p>
-            <p style="color: var(--text-muted); margin-bottom: 2rem; font-size: 0.9rem;">Unlock exclusive bookings, airdrops, and more</p>
-            
-            <div class="wallet-option" data-wallet="metamask">
-                <div style="font-size: 1.8rem;">🦊</div>
-                <div style="text-align: left;">
-                    <div style="font-weight: 600;">MetaMask</div>
-                    <div style="font-size: 0.9rem; color: var(--text-muted);">Detected</div>
-                </div>
-            </div>
-            
-            <div class="wallet-option" data-wallet="walletconnect">
-                <div style="font-size: 1.8rem;">🔗</div>
-                <div style="font-weight: 600;">WalletConnect</div>
-            </div>
-            
-            <div class="wallet-option" data-wallet="coinbase">
-                <div style="font-size: 1.8rem;">🪙</div>
-                <div style="font-weight: 600;">Coinbase Wallet</div>
-            </div>
-        </div>
+    <!-- Demo Indicator -->
+    <div class="demo-indicator">
+        <i class="fas fa-flask"></i>
+        Interactive Demo
     </div>
 
     <script>
-        // Enhanced State Management
+        // Enhanced State Management with Fake Data
         let isConnected = false;
         let walletAddress = '';
-        const balances = {
-            USDT: 1000,
-            NIGHTZ: 253
+        
+        // Enhanced fake data with more realistic values
+        const state = {
+            balances: {
+                USDT: 1000.00,
+                NIGHTZ: 253.00
+            },
+            portfolioValue: 12458.32,
+            transactions: [
+                { type: 'swap', from: 'USDT', to: 'NIGHTZ', fromAmount: 1000, toAmount: 5000, value: 5000, date: '1 day ago' }
+            ],
+            currentBooking: null
         };
-        
-        const properties = {
-            'beachfront': { name: 'Beachfront Villa', location: 'Malibu, USA', image: 'Beachfront Villa' },
-            'casa-akaw': { name: 'Casa Akaw', location: 'La Saladita, Mexico', image: 'Casa Akaw' },
-            'hillside': { name: 'Hillside Villa', location: 'Positano, Italy', image: 'Hillside Villa' },
-            'marina-sands': { name: 'Marina Sands', location: 'Sidney, Australia', image: 'Marina Sands' }
-        };
-        
-        let currentBooking = null;
-        
+
         // DOM Elements
         const connectWalletBtn = document.getElementById('connectWallet');
-        const walletModal = document.getElementById('walletModal');
         const swapButton = document.getElementById('swapButton');
         const sellAmount = document.getElementById('sellAmount');
         const buyAmount = document.getElementById('buyAmount');
         const maxBtn = document.getElementById('maxBtn');
         const usdtBalance = document.getElementById('usdtBalance');
         const nightzBalance = document.getElementById('nightzBalance');
+        const sidebarUsdtBalance = document.getElementById('sidebarUsdtBalance');
+        const sidebarNightzBalance = document.getElementById('sidebarNightzBalance');
         const swapSuccessMessage = document.getElementById('swapSuccessMessage');
         const feeAmount = document.getElementById('feeAmount');
         const minReceived = document.getElementById('minReceived');
         const switchTokens = document.getElementById('switchTokens');
         const historyBody = document.getElementById('historyBody');
+        const percentButtons = document.querySelectorAll('.percent-btn');
         const createPoolBtn = document.getElementById('createPoolBtn');
         const poolSuccessMessage = document.getElementById('poolSuccessMessage');
         const confirmBookingBtn = document.getElementById('confirmBookingBtn');
         const bookingSuccessMessage = document.getElementById('bookingSuccessMessage');
-        const heroTradeBtn = document.getElementById('heroTradeBtn');
-        const heroBookBtn = document.getElementById('heroBookBtn');
-        const notifyMeBtn = document.getElementById('notifyMeBtn');
-        const manageBookingBtn = document.getElementById('manageBookingBtn');
-        const viewAllBookings = document.getElementById('viewAllBookings');
-        const viewAllProperties = document.getElementById('viewAllProperties');
+        const navLinks = document.querySelectorAll('.nav-link');
+        const pages = document.querySelectorAll('.page');
+        const propertyButtons = document.querySelectorAll('.property-btn');
         
-        // Enhanced Navigation
-        document.querySelectorAll('.nav-link').forEach(link => {
+        // Navigation System
+        navLinks.forEach(link => {
             link.addEventListener('click', (e) => {
                 e.preventDefault();
-                const page = link.dataset.page;
+                const targetPage = link.getAttribute('data-page');
                 
-                // Hide all pages
-                document.querySelectorAll('.page').forEach(page => {
-                    page.classList.remove('active');
-                });
-                
-                // Remove active class from all nav links
-                document.querySelectorAll('.nav-link').forEach(link => {
-                    link.classList.remove('active');
-                });
-                
-                // Show target page and activate nav link
-                document.getElementById(`${page}-page`).classList.add('active');
+                // Update active nav link
+                navLinks.forEach(nav => nav.classList.remove('active'));
                 link.classList.add('active');
                 
-                // Special case for home page (which is trade)
-                if (page === 'home') {
-                    document.getElementById('home-page').classList.add('active');
-                }
-            });
-        });
-        
-        // Hero Button Actions
-        heroTradeBtn.addEventListener('click', () => {
-            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
-            document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
-            document.getElementById('trade-page').classList.add('active');
-            document.querySelector('.nav-link[data-page="home"]').classList.add('active');
-        });
-        
-        heroBookBtn.addEventListener('click', () => {
-            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
-            document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
-            document.getElementById('book-page').classList.add('active');
-            document.querySelector('.nav-link[data-page="book"]').classList.add('active');
-        });
-        
-        // Property Interactions
-        document.querySelectorAll('.property-item').forEach(item => {
-            item.addEventListener('click', function() {
-                const propertyId = this.dataset.property;
-                if (propertyId && properties[propertyId]) {
-                    showToast(`Viewing ${properties[propertyId].name}`);
-                    // In a real app, this would navigate to property details
-                }
+                // Show target page
+                pages.forEach(page => page.classList.remove('active'));
+                document.getElementById(`${targetPage}-page`).classList.add('active');
+                
+                showToast(`Navigated to ${targetPage.charAt(0).toUpperCase() + targetPage.slice(1)}`, 'success');
             });
         });
         
         // Enhanced Wallet Connection
         connectWalletBtn.addEventListener('click', () => {
             if (!isConnected) {
-                walletModal.style.display = 'flex';
-            } else {
-                // Disconnect
-                isConnected = false;
-                walletAddress = '';
-                connectWalletBtn.textContent = 'Connect wallet';
-                updateBalances();
-                swapButton.disabled = true;
-                swapButton.textContent = 'Connect Wallet to Swap';
-                showToast('Wallet disconnected');
-            }
-        });
-        
-        // Enhanced Wallet Options
-        document.querySelectorAll('.wallet-option').forEach(option => {
-            option.addEventListener('click', () => {
                 // Simulate wallet connection
                 isConnected = true;
                 walletAddress = '0xb195...F2f2';
@@ -1344,43 +1467,63 @@
                         ${walletAddress}
                     </span>
                 `;
-                walletModal.style.display = 'none';
-                updateBalances();
-                swapButton.disabled = false;
-                swapButton.textContent = 'Enter Amount to Swap';
                 
-                // Show success feedback
-                showToast('Wallet connected successfully!');
-            });
-        });
-        
-        // Close modal when clicking outside
-        walletModal.addEventListener('click', (e) => {
-            if (e.target === walletModal) {
-                walletModal.style.display = 'none';
+                // Enable trading functionality
+                swapButton.disabled = false;
+                sellAmount.disabled = false;
+                createPoolBtn.disabled = false;
+                confirmBookingBtn.disabled = false;
+                
+                showToast('Wallet connected successfully! All features are now enabled.', 'success');
+                updateUI();
+            } else {
+                // Disconnect
+                isConnected = false;
+                walletAddress = '';
+                connectWalletBtn.innerHTML = `
+                    <i class="fas fa-wallet"></i>
+                    Connect wallet
+                `;
+                
+                // Disable trading functionality
+                swapButton.disabled = true;
+                sellAmount.disabled = true;
+                createPoolBtn.disabled = true;
+                confirmBookingBtn.disabled = true;
+                swapButton.textContent = 'Connect Wallet to Swap';
+                
+                showToast('Wallet disconnected', 'warning');
+                updateUI();
             }
         });
         
         // Enhanced Percentage Buttons
-        document.querySelectorAll('[data-percent]').forEach(btn => {
+        percentButtons.forEach(btn => {
             btn.addEventListener('click', function() {
-                if (!isConnected) return;
+                // Remove active class from all buttons
+                percentButtons.forEach(b => b.classList.remove('active'));
+                // Add active class to clicked button
+                this.classList.add('active');
                 
-                const percent = parseInt(this.dataset.percent) / 100;
-                const maxAmount = balances.USDT;
-                const amount = maxAmount * percent;
+                if (!isConnected) {
+                    showToast('Please connect your wallet first', 'warning');
+                    return;
+                }
                 
-                sellAmount.value = amount.toFixed(1);
+                if (this.id === 'maxBtn') {
+                    // MAX button
+                    const maxAmount = state.balances.USDT;
+                    sellAmount.value = maxAmount.toFixed(2);
+                } else {
+                    // Percentage buttons
+                    const percent = parseInt(this.dataset.percent) / 100;
+                    const maxAmount = state.balances.USDT;
+                    const amount = maxAmount * percent;
+                    sellAmount.value = amount.toFixed(2);
+                }
+                
                 calculateSwap();
             });
-        });
-        
-        // Max Button
-        maxBtn.addEventListener('click', () => {
-            if (isConnected) {
-                sellAmount.value = balances.USDT;
-                calculateSwap();
-            }
         });
         
         // Enhanced Swap Calculation
@@ -1391,21 +1534,21 @@
             
             const sellValue = parseFloat(sellAmount.value) || 0;
             
-            if (sellValue > balances.USDT) {
+            if (sellValue > state.balances.USDT) {
                 swapButton.disabled = true;
-                swapButton.textContent = 'Insufficient Balance';
+                swapButton.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Insufficient Balance';
                 buyAmount.value = '';
-                feeAmount.textContent = '0 NIGHTZ';
-                minReceived.textContent = '0 NIGHTZ';
+                feeAmount.textContent = '0.00 NIGHTZ';
+                minReceived.textContent = '0.00 NIGHTZ';
                 return;
             }
             
             if (sellValue === 0) {
                 swapButton.disabled = true;
-                swapButton.textContent = 'Enter Amount to Swap';
+                swapButton.innerHTML = '<i class="fas fa-exchange-alt"></i> Enter Amount to Swap';
                 buyAmount.value = '';
-                feeAmount.textContent = '0 NIGHTZ';
-                minReceived.textContent = '0 NIGHTZ';
+                feeAmount.textContent = '0.00 NIGHTZ';
+                minReceived.textContent = '0.00 NIGHTZ';
                 return;
             }
             
@@ -1419,7 +1562,7 @@
             minReceived.textContent = `${received.toFixed(2)} NIGHTZ`;
             
             swapButton.disabled = false;
-            swapButton.textContent = `Swap ${sellValue} USDT for ${received.toFixed(2)} NIGHTZ`;
+            swapButton.innerHTML = `<i class="fas fa-exchange-alt"></i> Swap ${sellValue} USDT for ${received.toFixed(2)} NIGHTZ`;
         }
         
         // Enhanced Execute Swap
@@ -1430,109 +1573,65 @@
             const buyValue = parseFloat(buyAmount.value);
             
             // Update balances
-            balances.USDT -= sellValue;
-            balances.NIGHTZ += buyValue;
+            state.balances.USDT -= sellValue;
+            state.balances.NIGHTZ += buyValue;
+            
+            // Add to transaction history
+            state.transactions.unshift({
+                type: 'swap',
+                from: 'USDT',
+                to: 'NIGHTZ',
+                fromAmount: sellValue,
+                toAmount: buyValue,
+                value: buyValue * 5, // Assuming 1 NIGHTZ = $5
+                date: 'Just now'
+            });
             
             // Update UI
-            updateBalances();
-            
-            // Add to transaction history with animation
-            const newRow = document.createElement('tr');
-            newRow.style.opacity = '0';
-            newRow.innerHTML = `
-                <td>USDT/NIGHTZ</td>
-                <td>${sellValue} USDT → ${buyValue} NIGHTZ</td>
-                <td>Just now</td>
-            `;
-            historyBody.insertBefore(newRow, historyBody.firstChild);
-            
-            // Animate the new row
-            setTimeout(() => {
-                newRow.style.transition = 'opacity 0.5s ease';
-                newRow.style.opacity = '1';
-            }, 10);
+            updateUI();
             
             // Show enhanced success
-            swapButton.classList.add('pulse');
+            swapButton.classList.add('pulse', 'success');
             swapButton.innerHTML = '<i class="fas fa-check-circle"></i> Swap Successful!';
             swapSuccessMessage.style.display = 'block';
             
             // Show toast notification
-            showToast(`Successfully swapped ${sellValue} USDT for ${buyValue} NIGHTZ`);
+            showToast(`Successfully swapped ${sellValue} USDT for ${buyValue} NIGHTZ`, 'success');
             
             // Reset after delay
             setTimeout(() => {
                 sellAmount.value = '';
                 buyAmount.value = '';
-                swapButton.classList.remove('pulse');
-                swapButton.innerHTML = '<i class="fas fa-exchange-alt"></i> Swap Tokens';
+                swapButton.classList.remove('pulse', 'success');
+                swapButton.innerHTML = '<i class="fas fa-exchange-alt"></i> Enter Amount to Swap';
                 swapButton.disabled = true;
                 swapSuccessMessage.style.display = 'none';
-                feeAmount.textContent = '0 NIGHTZ';
-                minReceived.textContent = '0 NIGHTZ';
+                feeAmount.textContent = '0.00 NIGHTZ';
+                minReceived.textContent = '0.00 NIGHTZ';
+                
+                // Reset percentage buttons
+                percentButtons.forEach(b => b.classList.remove('active'));
+                maxBtn.classList.add('active');
             }, 3000);
         });
         
         // Switch Tokens
         switchTokens.addEventListener('click', () => {
-            showToast('Token switching functionality ready to implement!');
-        });
-        
-        // Enhanced Property Actions
-        document.querySelectorAll('.card-btn').forEach(btn => {
-            btn.addEventListener('click', function(e) {
-                e.stopPropagation();
-                const action = this.dataset.action;
-                const propertyCard = this.closest('.explore-card');
-                const propertyName = propertyCard.querySelector('h3').textContent;
-                
-                if (action === 'book') {
-                    // Navigate to book page with this property
-                    document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
-                    document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
-                    document.getElementById('book-page').classList.add('active');
-                    document.querySelector('.nav-link[data-page="book"]').classList.add('active');
-                    
-                    // Set the property in the booking form
-                    document.getElementById('bookPropertyName').textContent = propertyName;
-                    document.getElementById('bookPropertyLocation').textContent = propertyCard.querySelector('p').textContent;
-                    document.getElementById('bookPropertyImage').textContent = propertyName;
-                    
-                    showToast(`Booking ${propertyName}`);
-                } else if (action === 'trade') {
-                    showToast(`Trading ${propertyName} tokens`);
-                } else if (action === 'look') {
-                    showToast(`Viewing ${propertyName} details`);
-                } else if (action === 'track') {
-                    this.innerHTML = '<i class="fas fa-check"></i> Tracking';
-                    this.style.background = 'var(--success)';
-                    this.style.borderColor = 'var(--success)';
-                    showToast(`Added ${propertyName} to watchlist`);
-                }
-            });
-        });
-        
-        // Filter buttons
-        document.querySelectorAll('.filter-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-                this.classList.add('active');
-                showToast(`Filtered by ${this.textContent}`);
-            });
+            showToast('Token switching functionality ready for implementation', 'success');
         });
         
         // Create Pool
         createPoolBtn.addEventListener('click', () => {
             if (!isConnected) {
-                showToast('Please connect your wallet first');
+                showToast('Please connect your wallet first', 'warning');
                 return;
             }
             
-            const usdtAmount = document.getElementById('usdtPoolAmount').value;
-            const nightzAmount = document.getElementById('nightzPoolAmount').value;
+            const token1Amount = document.getElementById('poolToken1Amount').value;
+            const token2Amount = document.getElementById('poolToken2Amount').value;
             
-            if (!usdtAmount || !nightzAmount || parseFloat(usdtAmount) === 0 || parseFloat(nightzAmount) === 0) {
-                showToast('Please enter amounts for both tokens');
+            if (!token1Amount || !token2Amount || parseFloat(token1Amount) === 0 || parseFloat(token2Amount) === 0) {
+                showToast('Please enter amounts for both tokens', 'warning');
                 return;
             }
             
@@ -1545,32 +1644,72 @@
                 createPoolBtn.classList.remove('pulse');
                 createPoolBtn.innerHTML = '<i class="fas fa-check-circle"></i> Pool Created!';
                 
-                showToast('Liquidity pool created successfully!');
+                showToast('Liquidity pool created successfully!', 'success');
                 
                 // Reset after delay
                 setTimeout(() => {
                     createPoolBtn.innerHTML = '<i class="fas fa-plus-circle"></i> Create Pool';
                     poolSuccessMessage.style.display = 'none';
-                    document.getElementById('usdtPoolAmount').value = '';
-                    document.getElementById('nightzPoolAmount').value = '';
+                    document.getElementById('poolToken1Amount').value = '';
+                    document.getElementById('poolToken2Amount').value = '';
                 }, 3000);
             }, 1500);
         });
         
+        // Property Actions
+        propertyButtons.forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const action = this.getAttribute('data-action');
+                const propertyCard = this.closest('.property-card');
+                const propertyName = propertyCard.querySelector('h3').textContent;
+                const propertyLocation = propertyCard.querySelector('p').textContent;
+                
+                if (action === 'book') {
+                    // Navigate to book page with this property
+                    navLinks.forEach(nav => nav.classList.remove('active'));
+                    document.querySelector('.nav-link[data-page="book"]').classList.add('active');
+                    
+                    pages.forEach(page => page.classList.remove('active'));
+                    document.getElementById('book-page').classList.add('active');
+                    
+                    // Set the property in the booking form
+                    document.getElementById('bookPropertyName').textContent = propertyName;
+                    document.getElementById('bookPropertyLocation').textContent = propertyLocation;
+                    
+                    showToast(`Booking ${propertyName}`, 'success');
+                } else if (action === 'trade') {
+                    // Navigate to trade page
+                    navLinks.forEach(nav => nav.classList.remove('active'));
+                    document.querySelector('.nav-link[data-page="trade"]').classList.add('active');
+                    
+                    pages.forEach(page => page.classList.remove('active'));
+                    document.getElementById('trade-page').classList.add('active');
+                    
+                    showToast(`Trading ${propertyName} tokens`, 'success');
+                }
+            });
+        });
+        
         // Confirm Booking
         confirmBookingBtn.addEventListener('click', () => {
+            if (!isConnected) {
+                showToast('Please connect your wallet to confirm booking', 'warning');
+                return;
+            }
+            
             const checkIn = document.getElementById('checkInDate').value;
             const checkOut = document.getElementById('checkOutDate').value;
             const guestName = document.getElementById('guestName').value;
             const guestEmail = document.getElementById('guestEmail').value;
             
             if (!checkIn || !checkOut || !guestName || !guestEmail) {
-                showToast('Please fill in all booking details');
+                showToast('Please fill in all booking details', 'warning');
                 return;
             }
             
-            if (!isConnected) {
-                showToast('Please connect your wallet to confirm booking');
+            if (state.balances.NIGHTZ < 50) {
+                showToast('Insufficient NIGHTZ tokens for booking', 'warning');
                 return;
             }
             
@@ -1579,12 +1718,15 @@
             confirmBookingBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Confirming...';
             
             setTimeout(() => {
+                // Deduct NIGHTZ tokens
+                state.balances.NIGHTZ -= 50;
+                
                 bookingSuccessMessage.style.display = 'block';
                 confirmBookingBtn.classList.remove('pulse');
                 confirmBookingBtn.innerHTML = '<i class="fas fa-check-circle"></i> Booking Confirmed!';
                 
                 // Create booking object
-                currentBooking = {
+                state.currentBooking = {
                     property: document.getElementById('bookPropertyName').textContent,
                     location: document.getElementById('bookPropertyLocation').textContent,
                     checkIn: checkIn,
@@ -1592,80 +1734,89 @@
                     guests: document.getElementById('guestCount').value
                 };
                 
-                showToast('Booking confirmed successfully!');
+                showToast('Booking confirmed successfully! 50 NIGHTZ tokens redeemed.', 'success');
+                updateUI();
                 
                 // Reset after delay
                 setTimeout(() => {
                     confirmBookingBtn.innerHTML = '<i class="fas fa-lock"></i> Confirm Booking';
                     bookingSuccessMessage.style.display = 'none';
                     
-                    // Navigate back to home
-                    document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
-                    document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
-                    document.getElementById('home-page').classList.add('active');
-                    document.querySelector('.nav-link[data-page="home"]').classList.add('active');
+                    // Clear form
+                    document.getElementById('checkInDate').value = '';
+                    document.getElementById('checkOutDate').value = '';
+                    document.getElementById('guestName').value = '';
+                    document.getElementById('guestEmail').value = '';
                 }, 3000);
             }, 2000);
         });
         
-        // Notify Me Button
-        notifyMeBtn.addEventListener('click', () => {
-            notifyMeBtn.innerHTML = '<i class="fas fa-bell"></i> Notifications On';
-            notifyMeBtn.style.background = 'var(--success)';
-            showToast('You will be notified when Brisa Azul becomes available');
-        });
-        
-        // Manage Booking Button
-        manageBookingBtn.addEventListener('click', () => {
-            if (currentBooking) {
-                showToast(`Managing booking for ${currentBooking.property}`);
-                // In a real app, this would open a management interface
-            } else {
-                showToast('No active booking found');
-            }
-        });
-        
-        // View All Buttons
-        viewAllBookings.addEventListener('click', (e) => {
-            e.preventDefault();
-            showToast('Opening all bookings');
-        });
-        
-        viewAllProperties.addEventListener('click', (e) => {
-            e.preventDefault();
-            // Navigate to explore page
-            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
-            document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
-            document.getElementById('explore-page').classList.add('active');
-            document.querySelector('.nav-link[data-page="explore"]').classList.add('active');
-        });
-        
-        // Fee Tier Option
-        document.getElementById('feeTierOption').addEventListener('click', () => {
-            showToast('Fee tier selection expanded');
-        });
-        
         // Utility Functions
-        function updateBalances() {
-            usdtBalance.textContent = isConnected ? balances.USDT.toFixed(0) : '0';
-            nightzBalance.textContent = isConnected ? balances.NIGHTZ.toFixed(0) : '0';
+        function updateUI() {
+            // Update balances
+            usdtBalance.textContent = state.balances.USDT.toFixed(2);
+            nightzBalance.textContent = state.balances.NIGHTZ.toFixed(2);
+            sidebarUsdtBalance.textContent = `${state.balances.USDT.toFixed(2)} USDT`;
+            sidebarNightzBalance.textContent = `${state.balances.NIGHTZ.toFixed(2)} NIGHTZ`;
+            
+            // Update transaction history
+            updateTransactionHistory();
         }
         
-        function showToast(message) {
+        function updateTransactionHistory() {
+            historyBody.innerHTML = '';
+            
+            state.transactions.forEach(tx => {
+                const row = document.createElement('tr');
+                
+                let typeIcon, typeColor;
+                if (tx.type === 'swap') {
+                    typeIcon = 'fa-exchange-alt';
+                    typeColor = 'var(--primary-blue)';
+                } else {
+                    typeIcon = 'fa-home';
+                    typeColor = 'var(--accent)';
+                }
+                
+                row.innerHTML = `
+                    <td>
+                        <div class="tx-type">
+                            <i class="fas ${typeIcon}" style="color: ${typeColor};"></i>
+                            ${tx.type === 'swap' ? 'Swap' : 'Property Token'}
+                        </div>
+                    </td>
+                    <td>
+                        <div class="tx-amount tx-negative">-${tx.fromAmount} ${tx.from}</div>
+                        <div class="tx-amount tx-positive">+${tx.toAmount} ${tx.to}</div>
+                    </td>
+                    <td>$${tx.value.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+                    <td class="tx-date">${tx.date}</td>
+                `;
+                
+                historyBody.appendChild(row);
+            });
+        }
+        
+        function showToast(message, type = 'success') {
             const toast = document.createElement('div');
-            toast.className = 'toast';
-            toast.innerHTML = `<i class="fas fa-info-circle"></i> ${message}`;
+            toast.className = `toast ${type}`;
+            toast.innerHTML = `
+                <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-triangle'}"></i>
+                <div>${message}</div>
+            `;
             document.body.appendChild(toast);
             
             setTimeout(() => {
                 toast.remove();
-            }, 3000);
+            }, 4000);
         }
         
         // Initialize
-        updateBalances();
+        updateUI();
         swapButton.disabled = true;
         sellAmount.disabled = true;
+        createPoolBtn.disabled = true;
+        confirmBookingBtn.disabled = true;
         
         // Set minimum dates for booking
         const today = new Date().toISOString().split('T')[0];
@@ -1675,9 +1826,7 @@
         // Add some interactive elements on load
         document.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
-                if (!isConnected) {
-                    showToast('Connect your wallet to start trading and booking!');
-                }
+                showToast('Welcome to the Nightz Interactive Demo! Connect your wallet to enable all features.', 'success');
             }, 1000);
         });
     </script>
